@@ -2,6 +2,7 @@
   "name": "app",
   "version": "0.0.1",
   "private": true,
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -10,8 +11,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "expo": "~53.0.0",
     "react": "19.0.0",
-    "react-native": "0.79.2"
+    "react-native": "0.79.2",
+    "react-native-linear-gradient": "^2.8.3"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
