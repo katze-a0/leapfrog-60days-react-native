@@ -15,7 +15,7 @@ const Boxes = () => {
               <Text style={boxescss.boxText}>Analytics </Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Income')}>
             <View style={boxescss.boxes}>
               <Text style={boxescss.boxText}>Income</Text>
             </View>

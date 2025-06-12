@@ -8,7 +8,7 @@ import dashboardcss from '../styles/Dashboardcss';
 import Dashboard from './Dashboard';
 const DetailsScreen = () => {
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor: '#ffffff'}}>
       <View style={detailscss.container}>
         <View style={detailscss.headerSection}>
           <Text style={detailscss.welcomeTitle}>Tracker</Text>

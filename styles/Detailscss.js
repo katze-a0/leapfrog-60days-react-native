@@ -11,6 +11,7 @@ const detailscss = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 15,
     paddingHorizontal: 5,
+    marginTop: 45,
     backgroundColor: '#7d65db', // Purple background
   },
   welcomeTitle: {

@@ -1,40 +1,4 @@
-// import { StyleSheet } from 'react-native';
 
-// const homecss = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#f0f0f0',
-//   },
-//   welcomeText: {
-//     fontSize: 20,
-//     marginBottom: 30,
-//     color: '#333',
-//     fontWeight: '600',
-//   },
-//   button: {
-//     backgroundColor: '#007bff',
-//     paddingHorizontal: 30,
-//     paddingVertical: 15,
-//     borderRadius: 8,
-//     shadowColor: '#000',
-//     shadowOffset: {
-//       width: 0,
-//       height: 2,
-//     },
-//     shadowOpacity: 0.25,
-//     shadowRadius: 3.84,
-//     elevation: 5,
-//   },
-//   buttonText: {
-//     color: '#fff',
-//     fontSize: 16,
-//     fontWeight: 'bold',
-//   },
-// });
-
-// export default homecss;
 
 import {StyleSheet} from 'react-native';
 

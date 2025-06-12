@@ -11,6 +11,7 @@ const dashboardcss = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 20,
+    marginTop: 50,
   },
 });
 

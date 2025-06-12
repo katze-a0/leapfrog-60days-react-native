@@ -4,7 +4,8 @@ import {StyleSheet} from 'react-native';
 const boxescss = StyleSheet.create({
   container: {
     backgroundColor: '#ffffff',
-    padding: 10, // Added padding for better spacing
+    padding: 10,
+    // Added padding for better spacing
   },
   row: {
     flexDirection: 'row',

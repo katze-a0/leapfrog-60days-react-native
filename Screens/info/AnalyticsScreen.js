@@ -4,7 +4,7 @@ import analyticscss from '../../styles/info/Analyticscss';
 
 const AnalyticsScreen = () => {
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor: '#ffffff'}}>
       <View style={analyticscss.container}>
         <View style={analyticscss.headerSection}>
           <Text style={analyticscss.welcomeTitle}>Analytics</Text>
