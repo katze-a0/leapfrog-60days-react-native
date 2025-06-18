@@ -1,7 +1,11 @@
 {
   "name": "app",
+<<<<<<< HEAD
   "displayName": "app",
   "plugins": [
     "expo-router"
   ]
+=======
+  "displayName": "app"
+>>>>>>> 549d4bc3353444a650e663d07d2044e18c6beabd
 }
