@@ -1,8 +1,5 @@
-<<<<<<< HEAD
+
 import React, {useEffect, useState} from 'react';
-=======
-import React from 'react';
->>>>>>> 549d4bc3353444a650e663d07d2044e18c6beabd
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './Screens/HomeScreen';
@@ -10,7 +7,6 @@ import DetailsScreen from './Screens/DetailsScreen';
 import AnalyticsScreen from './Screens/info/AnalyticsScreen';
 import SavingsScreen from './Screens/info/SavingsScreen';
 import IncomeScreen from './Screens/info/IncomeScreen';
-<<<<<<< HEAD
 import SignUpScreen from './Screens/SignUpScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import {onAuthStateChanged} from 'firebase/auth';
@@ -43,17 +39,11 @@ const App = () => {
     );
   }
 
-=======
-
-const Stack = createNativeStackNavigator();
-
-const App = () => {
->>>>>>> 549d4bc3353444a650e663d07d2044e18c6beabd
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" options={{headerShown: false}}>
         <Stack.Screen name="Home" component={HomeScreen} />
-<<<<<<< HEAD
+
 
         <>
           <Stack.Screen
@@ -82,35 +72,15 @@ const App = () => {
             options={{headerShown: false}}
           />
         </>
-=======
-        <Stack.Screen
-          name="Details"
-          component={DetailsScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Analytics"
-          component={AnalyticsScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Savings"
-          component={SavingsScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Income"
-          component={IncomeScreen}
-          options={{headerShown: false}}
-        />
->>>>>>> 549d4bc3353444a650e663d07d2044e18c6beabd
+
+      
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
 export default App;
-<<<<<<< HEAD
+
 
 // export default function App() {
 // const [user, setUser] = useState(null);
@@ -151,5 +121,4 @@ export default App;
 //   </NavigationContainer>
 // );
 // }
-=======
->>>>>>> 549d4bc3353444a650e663d07d2044e18c6beabd
+

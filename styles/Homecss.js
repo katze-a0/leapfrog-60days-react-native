@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 549d4bc3353444a650e663d07d2044e18c6beabd
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -36,12 +32,10 @@ export const styles = StyleSheet.create({
   appName: {
     color: '#7d65db',
     fontWeight: '600',
-<<<<<<< HEAD
+
     padding:10},
    
-=======
-  },
->>>>>>> 549d4bc3353444a650e663d07d2044e18c6beabd
+
   formSection: {
     flex: 1,
   },

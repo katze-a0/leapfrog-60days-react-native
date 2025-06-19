@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 549d4bc3353444a650e663d07d2044e18c6beabd
 import React, {useState} from 'react';
 import {
   View,
@@ -13,7 +10,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-<<<<<<< HEAD
+
   Alert,
   Button,
   Stylesheet
@@ -65,26 +62,7 @@ const handleLogin = async () => {
   const handleSocialLogin =(props)=>{
   console.log('${props} Pressed');
   }
-=======
-} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {styles} from './../styles.js';
 
-const HomeScreen = ({navigation}) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-
-  // const handleLogin = () => {
-  //   // <DetailScreen />;
-  //   // console.log('Login pressed', {username, password});
-  //   navigation.navigate('Details');
-  // };
-
-  const handleSocialLogin = provider => {
-    console.log(`${provider} login pressed`);
-  };
->>>>>>> 549d4bc3353444a650e663d07d2044e18c6beabd
 
   return (
     <SafeAreaView style={styles.container}>
@@ -105,17 +83,12 @@ const HomeScreen = ({navigation}) => {
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.input}
-<<<<<<< HEAD
+
                 placeholder="email"
                 placeholderTextColor="#999"
                 value={email}
                 onChangeText={setEmail}
-=======
-                placeholder="Username"
-                placeholderTextColor="#999"
-                value={username}
-                onChangeText={setUsername}
->>>>>>> 549d4bc3353444a650e663d07d2044e18c6beabd
+
                 autoCapitalize="none"
                 autoCorrect={false}
               />
@@ -150,29 +123,23 @@ const HomeScreen = ({navigation}) => {
             </TouchableOpacity>
 
             {/* Login Button */}
-<<<<<<< HEAD
+
             <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-=======
-            <TouchableOpacity
-              style={styles.loginButton}
-              onPress={() => navigation.navigate('Details')}>
->>>>>>> 549d4bc3353444a650e663d07d2044e18c6beabd
+
               <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
 
             {/* Divider */}
             <View style={styles.dividerContainer}>
               <View style={styles.dividerLine} />
-<<<<<<< HEAD
+
               <Text style={styles.dividerText}>
                 Don't have account?
                 <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
                   <Text style={styles.appName}>Sign up</Text>
                 </TouchableOpacity>{' '}
               </Text>
-=======
-              <Text style={styles.dividerText}>or continue with</Text>
->>>>>>> 549d4bc3353444a650e663d07d2044e18c6beabd
+
               <View style={styles.dividerLine} />
             </View>
 
