@@ -1,5 +1,3 @@
-
-
 import React, {useState} from 'react';
 import {
   View,
@@ -10,14 +8,13 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-
   Alert,
   Button,
-  Stylesheet
+  Stylesheet,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {styles} from './../styles.js';
-import {auth} from '../auth/firebaseConfig.js';
+import {styles} from '../styles/styles.js';
+import {auth} from '../../auth/firebaseConfig.js';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import DetailsScreen from './DetailsScreen.js';
 
@@ -28,41 +25,42 @@ const HomeScreen = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-const handleLogin = async () => {
+  const handleLogin = async () => {
     setLoading(true);
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      Alert.alert('Success', 'Logged in successfully!');
-      // Navigate to a dashboard or home screen after successful login
-      navigation.navigate('Details'); // Assuming you have a 'Home' screen
-    } catch (error) {
-      let errorMessage = 'An unknown error occurred.';
-      if (error.code) {
-        switch (error.code) {
-          case 'auth/invalid-email':
-            errorMessage = 'That email address is invalid!';
-            break;
-          case 'auth/user-disabled':
-            errorMessage = 'This user has been disabled.';
-            break;
-          case 'auth/user-not-found':
-          case 'auth/wrong-password':
-            errorMessage = 'Invalid email or password.';
-            break;
-          default:
-            errorMessage = `Login failed: ${error.message}`;
-        }
-      }
-      Alert.alert('Login Error', errorMessage);
-      console.error('Login Error:', error);
-    } finally {
-      setLoading(false);
-    }
+    navigation.navigate('Details');
+    // try {
+    //   await signInWithEmailAndPassword(auth, email, password);
+    //   Alert.alert('Success', 'Logged in successfully!');
+    //   // Navigate to a dashboard or home screen after successful login
+    //   navigation.navigate('Details'); // Assuming you have a 'Home' screen
+    // } catch (error) {
+    //   let errorMessage = 'An unknown error occurred.';
+    //   if (error.code) {
+    //     switch (error.code) {
+    //       case 'auth/invalid-email':
+    //         errorMessage = 'That email address is invalid!';
+    //         break;
+    //       case 'auth/user-disabled':
+    //         errorMessage = 'This user has been disabled.';
+    //         break;
+    //       case 'auth/user-not-found':
+    //       case 'auth/wrong-password':
+    //         errorMessage = 'Invalid email or password.';
+    //         break;
+    //       default:
+    //         errorMessage = `Login failed: ${error.message}`;
+    //     }
+    //   }
+    //   Alert.alert('Login Error', errorMessage);
+    //   console.error('Login Error:', error);
+    // } finally {
+    //   setLoading(false);
+    // }
+    setLoading(false);
   };
-  const handleSocialLogin =(props)=>{
-  console.log('${props} Pressed');
-  }
-
+  const handleSocialLogin = props => {
+    console.log('${props} Pressed');
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -83,12 +81,10 @@ const handleLogin = async () => {
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.input}
-
                 placeholder="email"
                 placeholderTextColor="#999"
                 value={email}
                 onChangeText={setEmail}
-
                 autoCapitalize="none"
                 autoCorrect={false}
               />
@@ -125,7 +121,6 @@ const handleLogin = async () => {
             {/* Login Button */}
 
             <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-
               <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
 

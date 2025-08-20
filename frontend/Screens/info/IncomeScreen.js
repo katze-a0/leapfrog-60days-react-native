@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, Platform} from 'react';
 import {
   View,
   Text,
@@ -9,68 +9,94 @@ import {
   SafeAreaView,
   StatusBar,
 } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import incomecss from '../../styles/info/Incomecss';
 import HorizontalLine from '../../styles/Horizontalline';
 import Icon from 'react-native-vector-icons/Ionicons';
-import DatePicker from 'react-native-date-picker';
 import moment from 'moment';
 import {useNavigation} from '@react-navigation/native';
-// import DatePickerField from '../custom_calendar';
 
 const IncomeScreen = () => {
   const navigation = useNavigation();
   const [income, setIncome] = useState('');
-
   const [amount, setAmount] = useState('');
+  const [date, setDate] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
-  const [date, setDate] = useState('');
-  const onPressDoSomething = function () {
+  const onPressDoSomething = async function () {
     if (!amount || !income) {
       Alert.alert('Please fill the form');
-    } else
-      Alert.alert(
-        'Income Added', // Title
-        'Your current entry is added to list', // Message
-        [
-          // Buttons:
-          {
-            text: 'OK',
-            onPress: () => console.log('--> ok'),
-            style: 'ok',
+    } else {
+      try {
+        const incomeData = {
+          source: income.trim(),
+          amount: parseFloat(amount),
+          date: moment(date).format('YYYY-MM-DD'),
+          createdAt: new Date().toISOString(),
+        };
+
+        console.log('Submitting income data:', incomeData);
+
+        const response = await fetch('http://103.5.150.130:3000/api/income', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
-          +{
-            text: 'Cancel',
-            onPress: () => console.log('--> cancel'),
-            style: 'cancel',
-          },
-        ],
-      );
+          body: JSON.stringify(incomeData),
+        });
+
+        if (response.ok) {
+          Alert.alert('Income Added', 'Your current entry is added to list', [
+            {
+              text: 'OK',
+              onPress: () => console.log('--> ok'),
+              style: 'default',
+            },
+            {
+              text: 'Cancel',
+              onPress: () => console.log('--> cancel'),
+              style: 'cancel',
+            },
+          ]);
+
+          // Clear form after successful submission
+          setIncome('');
+          setAmount('');
+          setDate(new Date());
+        } else {
+          Alert.alert('Error', 'Failed to add income. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error submitting income:', error);
+        Alert.alert('Error', 'Failed to add incomeon DB. Please try again.');
+      }
+    }
   };
+
   const handleMenuPress = () => {
     console.log('Hamburger Menu Pressed');
   };
 
+  const onDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShowDatePicker(Platform.OS === 'ios'); // Keep open on iOS, close on Android
+    setDate(currentDate);
+  };
+
+  const showDatePickerModal = () => {
+    setShowDatePicker(true);
+  };
+
   return (
     <SafeAreaView style={incomecss.container}>
-      {/* <StatusBar
-        hidden={true}
-        barStyle="dark-content"
-        backgroundColor="#ffffff"
-      /> */}
-
       <View style={incomecss.customHeader}>
         <View style={incomecss.headerLeft}>
-          <Icon
-            name="chevron-back"
-            size={28}
-            color="#666"
+          <TouchableOpacity
             onPress={() => {
               navigation.navigate('Details');
             }}>
-            {/* <Text style={{fontSize: 17, color: '#999', marginTop: 40}}>
-              Details
-            </Text> */}
-          </Icon>
+            <Icon name="chevron-back" size={28} color="#666" />
+          </TouchableOpacity>
         </View>
         <View style={incomecss.headerCenter}>
           <Text>Income</Text>
@@ -87,18 +113,19 @@ const IncomeScreen = () => {
           <View style={incomecss.headerSection}>
             <Text style={incomecss.welcomeTitle}>Income Dashboard</Text>
           </View>
-          -{/* <HorizontalLine /> */}
+
           <Text style={incomecss.subtitle}>
             Add your monthly income details {'\n'}
             on <Text style={incomecss.appName}>Expense Tracker</Text>
           </Text>
+
           {/* form section for adding income*/}
           <View style={incomecss.formSection}>
             <View style={incomecss.inputContainer}>
               <TextInput
                 style={incomecss.input}
                 marginTop={40}
-                placeholder="Income  title"
+                placeholder="Income title"
                 placeholderTextColor="#999"
                 value={income}
                 onChangeText={setIncome}
@@ -107,7 +134,7 @@ const IncomeScreen = () => {
               />
             </View>
 
-            {/* Password Input */}
+            {/* Amount Input */}
             <View style={incomecss.inputContainer}>
               <TextInput
                 style={[incomecss.input, incomecss.amount]}
@@ -115,29 +142,32 @@ const IncomeScreen = () => {
                 placeholderTextColor="#999"
                 value={amount}
                 onChangeText={setAmount}
+                keyboardType="numeric"
                 autoCapitalize="none"
                 autoCorrect={false}
               />
             </View>
-            {/* Date of income */}
+
+            {/* Date Input */}
             <View style={incomecss.inputContainer}>
-              <TextInput
-                style={[incomecss.input, incomecss.amount]}
-                placeholder="Enter date"
-                placeholderTextColor="#999"
-                value={date}
-                onChangeText={setDate}
-                autoCapitalize="none"
-                autoCorrect={false}
-              />
+              <TouchableOpacity onPress={showDatePickerModal}>
+                <TextInput
+                  style={[incomecss.input, incomecss.amount]}
+                  placeholder="Enter date"
+                  placeholderTextColor="#999"
+                  value={moment(date).format('YYYY-MM-DD')}
+                  editable={false}
+                  pointerEvents="none"
+                />
+              </TouchableOpacity>
               <TouchableOpacity
                 style={incomecss.calendarIcon}
-                onPress={() => setShowPassword(!showPassword)}>
+                onPress={showDatePickerModal}>
                 <Icon name={'calendar-outline'} size={20} color="#666" />
               </TouchableOpacity>
             </View>
 
-            {/* Login Button */}
+            {/* Add Income Button */}
             <TouchableOpacity
               style={incomecss.loginButton}
               onPress={onPressDoSomething}>
@@ -146,6 +176,19 @@ const IncomeScreen = () => {
           </View>
         </View>
       </ScrollView>
+
+      {/* Community DateTimePicker */}
+      {showDatePicker && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode="date"
+          is24Hour={true}
+          display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+          onChange={onDateChange}
+          maximumDate={new Date()}
+        />
+      )}
     </SafeAreaView>
   );
 };
