@@ -7,14 +7,15 @@ async function viewData() {
 
     console.log('=== INCOME DATA ===');
     const incomes = await db.collection('income').find({}).toArray();
+    console.log('hey there!');
     incomes.forEach(income => {
-      console.log(`${income.source}: $${income.amount} (${income.date})`);
+      console.log(`${income.source}: ${income.amount} ${income.date}`);
     });
 
     console.log('\n=== EXPENSE DATA ===');
     const expenses = await db.collection('expense').find({}).toArray();
     expenses.forEach(expense => {
-      console.log(`${expense.category}: $${expense.amount} (${expense.date})`);
+      console.log(`${expense.category}: ${expense.amount} ${expense.date}`);
     });
   } catch (error) {
     console.error(error);

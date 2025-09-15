@@ -1,43 +1,64 @@
-// const {MongoClient, ServerApiVersion} = require('mongodb');
-// const uri =
-//   'mongodb+srv://ayusha01:Hellobunny10@cluster0.krr37su.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+// backend/server.js - Main server file
+//file2
+// const express = require('express');
+// const {connectDB} = require('./config/database');
 
-// // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-// const client = new MongoClient(uri, {
-//   serverApi: {
-//     version: ServerApiVersion.v1,
-//     strict: true,
-//     deprecationErrors: true,
-//   },
+// const app = express();
+// app.use(express.json());
+
+// // Routes
+// app.use('/api/income', require('./routes/income'));
+// app.use('/api/expenses', require('./routes/expense'));
+
+// // Start server
+// connectDB().then(() => {
+//   app.listen(3000, () => console.log('Server running on port 3000'));
 // });
 
-// async function run() {
-//   try {
-//     // Connect the client to the server	(optional starting in v4.7)
-//     await client.connect();
-//     // Send a ping to confirm a successful connection
-//     await client.db('admin').command({ping: 1});
-//     console.log(
-//       'Pinged your deployment. You successfully connected to MongoDB!',
-//     );
-//   } finally {
-//     // Ensures that the client will close when you finish/error
-//     await client.close();
-//   }
-// }
-// run().catch(console.dir);
-// backend/server.js - Main server file
 const express = require('express');
+const cors = require('cors');
 const {connectDB} = require('./config/database');
 
 const app = express();
-app.use(express.json());
+const PORT = process.env.PORT || 3000;
 
-// Routes
+// Middleware
+app.use(
+  cors({
+    origin: '*', // Allow all origins for development
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  }),
+);
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+// Test route
+app.get('/api/test', (req, res) => {
+  res.json({message: 'Backend server is running!'});
+});
+
+// Income routes
 app.use('/api/income', require('./routes/income'));
-app.use('/api/expenses', require('./routes/expense'));
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Error:', err);
+  res.status(500).json({error: 'Something went wrong!'});
+});
 
 // Start server
-connectDB().then(() => {
-  app.listen(3000, () => console.log('Server running on port 3000'));
+app.listen(PORT, '0.0.0.0', async () => {
+  console.log(`Server running on http://0.0.0.0:${PORT}`);
+
+  // Test database connection
+  try {
+    await connectDB();
+    console.log('Database connected successfully');
+  } catch (error) {
+    console.error('Database connection failed:', error);
+  }
 });
+
+module.exports = app;

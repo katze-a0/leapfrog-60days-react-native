@@ -1,19 +1,3 @@
-// const {MongoClient} = require('mongodb');
-// require('dotenv').config({path: './config.env'});
-
-// let db = null;
-
-// async function connectDB() {
-//   if (!db) {
-//     const client = new MongoClient(process.env.ATLAS_URI);
-//     await client.connect();
-//     db = client.db('my_expense_tracker');
-//     console.log('Connected to MongoDB');
-//   }
-//   return db;
-// }
-
-// module.exports = { connectDB };
 
 
 // backend/config/database.js - MongoDB connection module

@@ -37,12 +37,13 @@ const IncomeScreen = () => {
 
         console.log('Submitting income data:', incomeData);
 
-        const response = await fetch('http://103.5.150.130:3000/api/income', {
+        const response = await fetch('http://192.168.254.11:3000/api/income', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(incomeData),
+          timeout: 10000,
         });
 
         if (response.ok) {
@@ -68,7 +69,10 @@ const IncomeScreen = () => {
         }
       } catch (error) {
         console.error('Error submitting income:', error);
-        Alert.alert('Error', 'Failed to add incomeon DB. Please try again.');
+        Alert.alert(
+          'Error',
+          'Failed to add income on Database. Please try again.',
+        );
       }
     }
   };
